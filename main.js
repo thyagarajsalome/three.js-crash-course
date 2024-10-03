@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import "./style.css";
+import gsap from "gsap";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"; // Correct import
 
 // Scene
@@ -47,6 +48,10 @@ scene.add(pointLight);
 // Controls
 const controls = new OrbitControls(camera, canvas); // Corrected import usage
 controls.enableDamping = true; // Adds smooth camera movements
+controls.enablePan = false;
+controls.enableZoom = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 5;
 
 // Resize event listener
 window.addEventListener("resize", () => {
@@ -74,3 +79,11 @@ const loop = () => {
 };
 
 loop();
+
+//timeline
+const tl = gsap.timeline({ defaults: { duration: 1 } });
+tl.from(mesh.scale, { z: 0, x: 0, y: 0 }, { z: 1, x: 1, y: 1 });
+tl.fromTo("nav", { y: "-100%" }, { y: "0%" });
+tl.fromTo(",title", { opacity: 0 }, { opacity: 1 });
+
+//mouse animation color
