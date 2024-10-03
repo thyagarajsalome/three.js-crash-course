@@ -75,7 +75,7 @@ scene.add(glowMesh);
 
 // Stars
 function addStar() {
-  const geometry = new THREE.SphereGeometry(0.05, 24, 24);
+  const geometry = new THREE.SphereGeometry(0.03, 24, 24);
   const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
   const star = new THREE.Mesh(geometry, material);
 
@@ -96,11 +96,11 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 // Lighting
-const pointLight = new THREE.PointLight(0xffffff, 25);
+const pointLight = new THREE.PointLight(0xffffff, 35);
 pointLight.position.set(5, 5, 5);
 scene.add(pointLight);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 // scene.add(ambientLight);
 
 // Controls
