@@ -47,6 +47,10 @@ nav a {
   color: var(--text-color);
   font-weight: normal;
 }
+nav a ::hover {
+  color: darkgray;
+  animation: 01s;
+}
 
 nav ul {
   list-style: none;
