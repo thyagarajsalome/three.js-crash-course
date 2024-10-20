@@ -1,9 +1,14 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  // Your Vite configuration options
+  base: "./",
   build: {
     outDir: "dist",
+    assetsDir: "assets",
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
   },
-  // Add any other necessary configurations
 });

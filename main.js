@@ -31,11 +31,11 @@ const sizes = {
 // Texture loader
 const textureLoader = new THREE.TextureLoader();
 
-const texture = textureLoader.load("/texture/earth.jpg");
-const cloudMap = textureLoader.load("/texture/cloud.jpg");
-const bump = textureLoader.load("/texture/bump.jpg");
-const specularMap = textureLoader.load("/texture/reflection.jpg");
-const milkyWayTexture = textureLoader.load("/texture/milky_way.jpg");
+const texture = textureLoader.load("public/texture/earth.jpg");
+const cloudMap = textureLoader.load("public/texture/cloud.jpg");
+const bump = textureLoader.load("public/texture/bump.jpg");
+const specularMap = textureLoader.load("public/texture/reflection.jpg");
+const milkyWayTexture = textureLoader.load("public/texture/milky_way.jpg");
 
 // Milky Way background
 const milkyWayGeometry = new THREE.SphereGeometry(500, 60, 40);
