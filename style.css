@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #ff0000;
+  --primary-color: #fff;
   --bg-color: #121212;
-  --text-color: #ff0000;
+  --text-color: #fff;
 }
 
 * {
@@ -13,7 +13,7 @@
 body,
 html {
   overflow-x: hidden;
-  font-family: "orbitron";
+  font-family: "Bebas Neue";
   background-color: var(--bg-color);
   color: var(--text-color);
 }

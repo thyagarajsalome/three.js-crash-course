@@ -48,8 +48,13 @@ const milkyWayMaterial = new THREE.MeshBasicMaterial({
 const milkyWay = new THREE.Mesh(milkyWayGeometry, milkyWayMaterial);
 scene.add(milkyWay);
 
-// Earth creation
-const earthGeometry = new THREE.SphereGeometry(3, 64, 64);
+// Create Earth Group to hold both outer and inner spheres
+const earthGroup = new THREE.Group();
+scene.add(earthGroup);
+
+// Outer Earth sphere
+const outerRadius = 3;
+const earthGeometry = new THREE.SphereGeometry(outerRadius, 64, 64);
 const earthMaterial = new THREE.MeshPhongMaterial({
   map: texture,
   bumpMap: bump,
@@ -57,19 +62,37 @@ const earthMaterial = new THREE.MeshPhongMaterial({
   specularMap: specularMap,
   specular: new THREE.Color("grey"),
   shininess: 5,
+  side: THREE.FrontSide, // Only render outside
 });
 const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
-scene.add(earthMesh);
+earthGroup.add(earthMesh);
+
+// Inner Earth sphere (slightly smaller and darker)
+const thickness = 0.1; // Thickness of the Earth's shell
+const innerRadius = outerRadius - thickness;
+const innerEarthGeometry = new THREE.SphereGeometry(innerRadius, 64, 64);
+const innerEarthMaterial = new THREE.MeshPhongMaterial({
+  map: texture,
+  bumpMap: bump,
+  bumpScale: -0.4,
+  specularMap: specularMap,
+  specular: new THREE.Color("grey"),
+  shininess: 5,
+  side: THREE.BackSide, // Only render inside
+  color: new THREE.Color(0x666666), // Darker color for inner surface
+});
+const innerEarthMesh = new THREE.Mesh(innerEarthGeometry, innerEarthMaterial);
+earthGroup.add(innerEarthMesh);
 
 // Cloud layer
-const cloudGeometry = new THREE.SphereGeometry(3.01, 64, 64);
+const cloudGeometry = new THREE.SphereGeometry(outerRadius + 0.01, 64, 64);
 const cloudMaterial = new THREE.MeshPhongMaterial({
   map: cloudMap,
   transparent: true,
   opacity: 0.4,
 });
 const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
-scene.add(cloudMesh);
+earthGroup.add(cloudMesh);
 
 // Enhanced Earth glow
 const glowGeometry = new THREE.SphereGeometry(5.5, 64, 64);
@@ -128,11 +151,11 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 // Lighting
-const pointLight = new THREE.PointLight(0xffffff, 70); // Reduced intensity
+const pointLight = new THREE.PointLight(0xffffff, 70);
 pointLight.position.set(5, 5, 5);
 scene.add(pointLight);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.01); // Slightly increased ambient light
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.01);
 scene.add(ambientLight);
 
 // Controls
@@ -148,9 +171,9 @@ function animate() {
   requestAnimationFrame(animate);
   controls.update();
 
-  earthMesh.rotation.y += 0.0005;
-  cloudMesh.rotation.y += 0.0007; // Clouds rotate slightly faster
-  milkyWay.rotation.y += 0.0001; // Slow rotation of the Milky Way
+  earthGroup.rotation.y += 0.0005;
+  cloudMesh.rotation.y += 0.0007;
+  milkyWay.rotation.y += 0.0001;
 
   // Update glow
   glowMaterial.uniforms.viewVector.value = new THREE.Vector3().subVectors(
@@ -172,7 +195,7 @@ window.addEventListener("resize", () => {
 
 // GSAP Animations
 const tl = gsap.timeline({ defaults: { duration: 1 } });
-tl.fromTo(earthMesh.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
+tl.fromTo(earthGroup.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
 tl.fromTo("nav", { y: "-100%" }, { y: "0%" });
 tl.fromTo(".title", { opacity: 0 }, { opacity: 1 });
 
