@@ -3,38 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Planet-3d</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
+    <title>Earth Visualization</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        overflow: hidden;
+        background: #000;
+      }
+
+      .webgl {
+        position: fixed;
+        top: 0;
+        left: 0;
+        outline: none;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <canvas class="webgl"></canvas>
-    <header>
-      <nav>
-        <a href="/" class="logo">Planet-3D</a>
-        <ul>
-          <li>
-            <a href="https://frontend-3dartist.netlify.app/" target="_blank"
-              >About</a
-            >
-          </li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#explore">Explore</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button class="menu-toggle" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </nav>
-    </header>
-
-    <script type="module" src="./main.js"></script>
+    <script type="module" src="/main.js"></script>
   </body>
 </html>
