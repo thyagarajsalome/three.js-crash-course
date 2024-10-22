@@ -48,7 +48,7 @@ nav a {
   font-weight: normal;
 }
 nav a ::hover {
-  color: darkgray;
+  color: dodgerblue;
   animation: 01s;
 }
 
